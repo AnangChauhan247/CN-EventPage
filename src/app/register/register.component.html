@@ -1,0 +1,38 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
+<div class="parent">
+  <div class="banner">
+    <img src="{{ event.cover_picture }}" alt="GetData" class="banner-img" />
+  </div>
+
+  <div class="subParent">
+    <h1 class="MainHead">{{ event.name }}</h1>
+    <div class="details">
+      <button class="reg-btn" style="padding: 15px">Register Now</button>
+      <p class="date" style="padding: 15px; ;">
+        <span class="material-symbols-outlined" style="vertical-align:middle; font-size: 20px;"> calendar_month </span>
+        <b>Starts on </b>: {{ event.event_start_time | date }}
+      </p>
+      <p class="price" style="padding: 15px">
+        <span class="material-symbols-outlined" style="vertical-align:middle; font-size: 20px;"> sell </span><b>Price</b>:
+        {{ event.fees }}
+      </p>
+      <p class="venue" style="padding: 15px">
+        <span class="material-symbols-outlined" style="vertical-align:middle; font-size: 20px;"> location_on </span
+        ><b>Venue</b>: {{ event.venue }}
+      </p>
+    </div>
+    <hr />
+
+    <h3>Description</h3>
+    <p class="desc">{{ event.short_desc }}</p>
+
+    <div class="tags">
+      <button *ngFor="let tag of event.card_tags" class="tags-btn">
+        {{ tag }}
+      </button>
+    </div>
+  </div>
+</div>

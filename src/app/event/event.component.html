@@ -1,0 +1,167 @@
+<!-- import { RegisterPgComponent } from '../register-pg/register-pg.component'; -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
+<div class="main-page">
+  <h1
+    style="
+      font-size: 40px;
+      margin-left: 40px;
+      padding-top: 30px;
+      padding-left: 60px;
+      color: aliceblue;
+    "
+  >
+    Events & News
+  </h1>
+  <p
+    style="
+      font-size: 20px;
+      margin-left: 40px;
+      padding-left: 60px;
+      color: aliceblue;
+    "
+  >
+    Learn, Compete & Grow
+  </p>
+
+  <div class="home-container">
+    <div class="container-header">
+      <div class="top-header">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+          <li ngbNavItem>
+            <a ngbNavLink (click)="updateCat('ALL_EVENTS')">
+              <i
+                class="material-symbols-outlined"
+                style="position: relative; top: 5px; left: -2px"
+                >Calendar_Month</i
+              >
+              All Events</a
+            >
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink (click)="updateCat('WEBINAR')">
+              <i
+                class="material-symbols-outlined"
+                style="position: relative; top: 5px; left: -2px"
+                >Laptop</i
+              >
+              Webinars</a
+            >
+          </li>
+
+          <li ngbNavItem>
+            <a ngbNavLink (click)="updateCat('CODING_EVENT')">
+              <i
+                class="material-symbols-outlined"
+                style="position: relative; top: 5px; left: -2px"
+                >Event_Available</i
+              >
+              Coding Events</a
+            >
+          </li>
+          <li ngbNavItem></li>
+
+          <li ngbNavItem>
+            <a ngbNavLink (click)="updateCat('BOOTCAMP_EVENT')">
+              <i
+                class="material-symbols-outlined"
+                style="position: relative; top: 5px; left: -2px"
+                >Sync_Saved_Locally</i
+              >
+              Bootcamp Events</a
+            >
+          </li>
+          <li ngbNavItem></li>
+
+          <li ngbNavItem>
+            <a ngbNavLink (click)="updateCat('WORKSHOP')">
+              <i
+                class="material-symbols-outlined"
+                style="position: relative; top: 5px; left: -2px"
+                >Smart_Display</i
+              >
+              Workshop</a
+            >
+          </li>
+          <li ngbNavItem></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button (click)="updateSubCat('Upcoming')">Upcoming</button>
+      <button (click)="updateSubCat('Archived')">Archived</button>
+      <button (click)="updateSubCat('All Time Favorites')">
+        All Time Favourite
+      </button>
+    </div>
+
+    <div class="child">
+      <div class="event-details">
+        <div class="card" *ngFor="let event of events">
+          <img
+            class="card-img-top"
+            src="{{ event.cover_picture }}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ event.name }}</h5>
+            <table>
+              <tr>
+                <th>Starts On</th>
+                <th style="padding-right: 82px">Entry Fee</th>
+                <th>Venue</th>
+              </tr>
+              <tr>
+                <td>
+                  {{ event.registration_start_time | date }}
+                </td>
+                <td>{{ event.fees === 0 ? "Free" : event.fees }}</td>
+                <td>{{ event.venue }}</td>
+              </tr>
+            </table>
+            <p class="card-text" style="margin-top: 19px">
+              {{ event.short_desc }}
+            </p>
+            <div
+              class="btn btn-primary"
+              [routerLink]="['/register']"
+              (click)="storeDataInLS(event)"
+            >
+              Register Now
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tags-container">
+        <ul>
+          <h3 style="color: #656468">Tags</h3>
+          <hr />
+          <div
+            *ngFor="let tag of tags"
+            class="parentBtn"
+            (click)="updateTags(tag)"
+          >
+            <button
+              *ngIf="selected_tags.includes(tag)"
+              style="background-color: #EF9A53; " 
+              class="btn-tag"
+            >
+            {{ tag }}
+            </button>
+
+            <button
+              *ngIf="!selected_tags.includes(tag)"
+              style="background-color: #EEEEEE"
+              class="btn-tag"
+            >
+              {{ tag }}
+            </button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
